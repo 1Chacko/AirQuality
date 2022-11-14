@@ -1,6 +1,7 @@
 package com.example.airquality.di
 
-import com.example.airquality.logic.GetStationsUseCase
+import com.example.airquality.logic.FakeRemoteStationsRepository
+import com.example.airquality.logic.RemoteStationsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,7 +14,7 @@ object AirQualityProvider {
 
     @Provides
     @Singleton
-    fun provideGetStationUseCase(): GetStationsUseCase {
-        return GetStationsUseCase()
+    fun provideRemoteStationsRepository() : RemoteStationsRepository {
+        return FakeRemoteStationsRepository()
     }
 }
