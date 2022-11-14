@@ -4,7 +4,6 @@ import com.example.airquality.entity.AQStation
 import com.example.airquality.logic.RemoteStationsRepository
 import com.google.gson.annotations.SerializedName
 import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.Headers
 import javax.inject.Inject
 
