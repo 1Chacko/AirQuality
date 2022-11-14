@@ -4,10 +4,16 @@ import com.example.airquality.entity.AQStation
 import com.example.airquality.logic.RemoteStationsRepository
 import com.google.gson.annotations.SerializedName
 import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.Headers
 import javax.inject.Inject
 
 class AirlyStationDataSource @Inject constructor(private val airlyService: AirlyService) :
     RemoteStationsRepository {
+
+    companion object {
+        const val HOST = "https://airapi.airly.eu/v2/"
+    }
 
     override suspend fun getAll(): List<AQStation> {
         val installations = airlyService.getInstallations()
@@ -24,6 +30,7 @@ class AirlyStationDataSource @Inject constructor(private val airlyService: Airly
 
     interface AirlyService {
 
+        @Headers("apikey: PASTE KEY API HERE")
         @GET("installations/nearest?lat=50.062006&lng=19.940984&maxDistanceKM=5&maxResults=100")
         suspend fun getInstallations(): List<Installation>
     }
