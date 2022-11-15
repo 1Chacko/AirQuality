@@ -1,6 +1,8 @@
 package com.example.airquality.di
 
 import com.example.airquality.data.AirlyStationDataSource
+import com.example.airquality.data.local.InMemoryStationsRepository
+import com.example.airquality.logic.repository.LocalStationsRepository
 import com.example.airquality.logic.repository.RemoteStationsRepository
 import dagger.Module
 import dagger.Provides
@@ -16,6 +18,12 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AirQualityProvider {
+
+    @Provides
+    @Singleton
+    fun provideLocalStationsRepository(): LocalStationsRepository {
+        return InMemoryStationsRepository()
+    }
 
     @Provides
     @Singleton
