@@ -1,7 +1,7 @@
 package com.example.airquality.di
 
 import com.example.airquality.data.AirlyStationDataSource
-import com.example.airquality.logic.RemoteStationsRepository
+import com.example.airquality.logic.repository.RemoteStationsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

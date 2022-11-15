@@ -1,6 +1,7 @@
 package com.example.airquality.logic
 
 import com.example.airquality.entity.AQStation
+import com.example.airquality.logic.repository.RemoteStationsRepository
 import javax.inject.Singleton
 
 @Singleton

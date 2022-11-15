@@ -1,10 +1,9 @@
 package com.example.airquality.data
 
 import com.example.airquality.entity.AQStation
-import com.example.airquality.logic.RemoteStationsRepository
+import com.example.airquality.logic.repository.RemoteStationsRepository
 import com.google.gson.annotations.SerializedName
 import retrofit2.http.GET
-import retrofit2.http.Headers
 import javax.inject.Inject
 
 class AirlyStationDataSource @Inject constructor(private val airlyService: AirlyService) :
