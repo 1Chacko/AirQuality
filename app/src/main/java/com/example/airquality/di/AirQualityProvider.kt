@@ -1,12 +1,16 @@
 package com.example.airquality.di
 
+import android.content.Context
+import androidx.room.Room
 import com.example.airquality.data.AirlyStationDataSource
-import com.example.airquality.data.local.InMemoryStationsRepository
+import com.example.airquality.data.local.db.AppDatabase
+import com.example.airquality.data.local.db.DatabaseStationsRepository
 import com.example.airquality.logic.repository.LocalStationsRepository
 import com.example.airquality.logic.repository.RemoteStationsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -21,8 +25,9 @@ object AirQualityProvider {
 
     @Provides
     @Singleton
-    fun provideLocalStationsRepository(): LocalStationsRepository {
-        return InMemoryStationsRepository()
+    fun provideLocalStationsRepository(@ApplicationContext context: Context): LocalStationsRepository {
+        val dataBase = Room.databaseBuilder(context, AppDatabase::class.java, "AirQualityDb").build()
+        return DatabaseStationsRepository(dataBase)
     }
 
     @Provides
@@ -63,7 +68,7 @@ object AirQualityProvider {
 class AirlyAuthInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val requestBuilder = chain.request().newBuilder()
-        requestBuilder.addHeader("apikey", "API KEY HERE")
+        requestBuilder.addHeader("apikey", "iHPNP9d1Xd4e1Sv8wfbAc3lMO2kald3A")
 
         return chain.proceed(requestBuilder.build())
     }
