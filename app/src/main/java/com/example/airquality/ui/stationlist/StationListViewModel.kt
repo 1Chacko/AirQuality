@@ -23,6 +23,7 @@ class StationListViewModel @Inject constructor(private val getStationsUseCase: G
     }
 
     fun onPullToRefresh() {
+        state = state.copy(isRefreshing = true)
         loadStations()
     }
 
@@ -30,13 +31,20 @@ class StationListViewModel @Inject constructor(private val getStationsUseCase: G
         viewModelScope.launch {
             val stations = getStationsUseCase.execute()
             state = State(stations.map { aqStation ->
-                aqStation.name
+                StationViewData(aqStation.name, aqStation.city, aqStation.sponsor, aqStation.sponsorImage)
             })
         }
     }
 
     data class State(
-        val stations: List<String> = listOf(),
+        val stations: List<StationViewData> = listOf(),
         val isRefreshing: Boolean = false
+    )
+
+    data class StationViewData(
+        val title : String,
+        val subtitle : String,
+        val label : String,
+        val imageUrl : String?,
     )
 }
